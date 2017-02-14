@@ -11,12 +11,21 @@ namespace Grades.Tests.Types
     public class TypeTests
     {
         [TestMethod]
+        public void UpperCaseTheString()
+        {
+            string ego = "scott";
+            ego = ego.ToUpper();
+
+            Assert.AreEqual("SCOTT", ego);
+        }
+
+        [TestMethod]
         public void AddDaysToDateTime()
         {
             DateTime date = new DateTime(2015, 1, 1);
-            date.AddDays(1);
+            date = date.AddDays(1);
 
-            Assert.AreEqual(2, date.Day);
+            Assert.AreEqual(2, date.Day); // now it passes b/c we're assigning it back to itself.
         }
 
 
