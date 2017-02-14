@@ -11,17 +11,26 @@ namespace Grades.Tests.Types
     public class TypeTests
     {
         [TestMethod]
+        public void AddDaysToDateTime()
+        {
+            DateTime date = new DateTime(2015, 1, 1);
+            date.AddDays(1);
+
+            Assert.AreEqual(2, date.Day);
+        }
+
+
+
+        [TestMethod]
         public void ValuesTypesPassByMethod()
         {
             int s = 46;
-            IncremenetNumber(out s);
+            IncremenetNumber(s);
 
-            Assert.AreEqual(s, 47);
+            Assert.AreEqual(s, 46);
         }
 
-        private void IncremenetNumber(out int number) // out kw. The compiler expects you to be creating an output
-            // Here, there is an error though as it doesn't want the var to be initialized. 
-            // out and ref behave much the same though.
+        private void IncremenetNumber(int number)
         {
             number++;
         }
@@ -32,15 +41,14 @@ namespace Grades.Tests.Types
             GradeBook book1 = new GradeBook();
             GradeBook book2 = book1;
 
-            GiveBookAName(ref book2); // passing by reference. ref is kw, also in method parameter, must be in both places.
-            Assert.AreEqual("A GradeBook", book2.Name);
+            GiveBookAName(book2);
+            Assert.AreEqual("A GradeBook", book1.Name);
 
         }
 
-        private void GiveBookAName(ref GradeBook book) // As i understand, you're passing in a reference, rather than the 
-            // pointer which would affect the object itself. 
+        private void GiveBookAName(GradeBook book)
         {
-            book = new GradeBook();
+            //book = new GradeBook();
             book.Name = "A GradeBook";
         }
 
