@@ -14,14 +14,14 @@ namespace Grades.Tests.Types
         public void ValuesTypesPassByMethod()
         {
             int s = 46;
-            IncremenetNumber(ref s);
+            IncremenetNumber(out s);
 
             Assert.AreEqual(s, 47);
         }
 
-        private void IncremenetNumber(ref int number) // can pass by ref with values as well. 
-            // Think of number as a refference to the s varialbe location. Any changes made to s in this function will
-            // affect the value of s.
+        private void IncremenetNumber(out int number) // out kw. The compiler expects you to be creating an output
+            // Here, there is an error though as it doesn't want the var to be initialized. 
+            // out and ref behave much the same though.
         {
             number++;
         }
