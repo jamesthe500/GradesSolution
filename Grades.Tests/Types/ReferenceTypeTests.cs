@@ -13,7 +13,7 @@ namespace Grades.Tests.Types
         [TestMethod]
         public void UsingArrays()
         {
-            //float[] grades;
+            float[] grades; // declare it as an array first.
             grades = new float[3];
 
             AddGrades(grades);
