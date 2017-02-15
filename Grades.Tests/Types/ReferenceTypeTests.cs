@@ -11,10 +11,27 @@ namespace Grades.Tests.Types
     public class TypeTests
     {
         [TestMethod]
+        public void UsingArrays()
+        {
+            //float[] grades;
+            grades = new float[3];
+
+            AddGrades(grades);
+
+            Assert.AreEqual(89.1f, grades[1]);
+        }
+
+        private void AddGrades(float[] grades)
+        {
+            //grades = new float[5]; // breaks test as arrays are references and the test is looking at a different grades
+            grades[1] = 89.1f; 
+        }
+
+        [TestMethod]
         public void UpperCaseTheString()
         {
             string ego = "scott";
-            ego = ego.ToUpper();
+            ego = ego.ToUpper(); // like datetimes, strings are references, so to change the value you need to use this syntax.
 
             Assert.AreEqual("SCOTT", ego);
         }
