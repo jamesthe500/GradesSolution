@@ -17,8 +17,10 @@ namespace Grades
 
             GradeBook book = new GradeBook(); //constructor, new kw is invoking a new instance of GradeBook
 
-            book.NameChanged += new NameChangedDelegate(OnNameChanged); // this is subscribing to the name change via the delegate
-            book.NameChanged += new NameChangedDelegate(OnNameChanged2); // This overwrites the origninal message withough the +=
+            book.NameChanged += OnNameChanged; 
+            book.NameChanged += OnNameChanged2;
+            book.NameChanged += OnNameChanged2;
+            book.NameChanged -= OnNameChanged2; // note, -= only wipes out one of the callings.
 
             book.Name = "Scott's Grade Book";
             book.Name = "Jim's Grade Book";
@@ -35,12 +37,12 @@ namespace Grades
 
         }
 
-        static void OnNameChanged(string existingName, string newName)
+        static void OnNameChanged(object sender, NameChangedEventArgs args)
         {
-            Console.WriteLine($"Grade book changing name from {existingName} to {newName}");
+            Console.WriteLine($"Grade book changing name from {args.ExistingName} to {args.NewName}");
         }
 
-        static void OnNameChanged2(string existingName, string newName)
+        static void OnNameChanged2(object sender, NameChangedEventArgs args)
         {
             Console.WriteLine("***");
         }

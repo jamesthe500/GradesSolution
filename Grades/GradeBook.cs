@@ -59,15 +59,19 @@ namespace Grades
                 {
                     if(_name != value) // A delegate to let the program know when the name is changed. Databinding e.g.
                     {
-                        //Name Changed(_name, value) pseudo-code to guide what delegate to make
-                        NameChanged(_name, value);
+                        //Name Changed(_name, value) // pseudo-code to guide what delegate to make
+                        NameChangedEventArgs args = new NameChangedEventArgs();
+                        args.ExistingName = _name;
+                        args.NewName = value;
+
+                        NameChanged(this, args);
                     }
                     _name = value;
                 }
             }
         }
 
-        public NameChangedDelegate NameChanged;
+        public event NameChangedDelegate NameChanged; // just add the event kw and this becomes one.
 
         // an explicitly created field to hold the string value is needed.
         private string _name;
