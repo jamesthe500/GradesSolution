@@ -75,6 +75,7 @@ namespace Grades
                 {
                     throw new ArgumentException("Name cannot be blank.");
                 }
+
                 if (_name != value) // A delegate to let the program know when the name is changed. Databinding e.g.
                 {
                     //Name Changed(_name, value) // pseudo-code to guide what delegate to make

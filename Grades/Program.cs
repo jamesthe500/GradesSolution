@@ -13,7 +13,17 @@ namespace Grades
         {
            
             GradeBook book = new GradeBook(); //constructor, new kw is invoking a new instance of GradeBook
-            book.Name = null;
+           
+
+            try // b/c the written value could be null and thus throw and exception, we try it first
+            {
+                Console.WriteLine("Enter a grade book name.");
+                book.Name = Console.ReadLine();
+            }
+            catch(ArgumentException ex) // the ex is a var to hold the exception object thrown.
+            {
+                Console.WriteLine(ex.Message); // accessing the Message property of the exception. There are many others like stack trace.
+            } 
 
             book.AddGrade(91);
             book.AddGrade(89.5f); //The f instructs to make this a float.
