@@ -24,6 +24,14 @@ namespace Grades
             {
                 Console.WriteLine(ex.Message); // accessing the Message property of the exception. There are many others like stack trace.
             } 
+            catch(NullReferenceException) // this exception is happening when no one is subscribed to the NameChanged event.
+            {
+                Console.WriteLine("Something went wrong");
+            }
+            catch (Exception) // chaining catches. Evaluated in order, so put more specific above less. "Exception" is dangerous
+            {
+                Console.WriteLine("AACK!");
+            }
 
             book.AddGrade(91);
             book.AddGrade(89.5f); //The f instructs to make this a float.
