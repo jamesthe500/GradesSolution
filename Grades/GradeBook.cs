@@ -28,7 +28,7 @@ namespace Grades
             }
             stats.AverageGrade = sum / grades.Count;
             return stats;
-        
+
         }
 
         public void WriteGrades(TextWriter destination) // TextWriter type doesn't care where it's sending the text.
@@ -36,7 +36,7 @@ namespace Grades
             /*
             for (int i = 0; i < grades.Count; i++)
             {
-                destination.WriteLine(grades[i]); 
+                destination.WriteLine(grades[i]);   
             }
             */
 
@@ -71,19 +71,21 @@ namespace Grades
             }
             set
             {
-                if(!String.IsNullOrEmpty(value)) // value is like a param expected by IsNullOr...
+                if (string.IsNullOrEmpty(value))
                 {
-                    if(_name != value) // A delegate to let the program know when the name is changed. Databinding e.g.
-                    {
-                        //Name Changed(_name, value) // pseudo-code to guide what delegate to make
-                        NameChangedEventArgs args = new NameChangedEventArgs();
-                        args.ExistingName = _name;
-                        args.NewName = value;
-
-                        NameChanged(this, args);
-                    }
-                    _name = value;
+                    throw new ArgumentException("Name cannot be blank.");
                 }
+                if (_name != value) // A delegate to let the program know when the name is changed. Databinding e.g.
+                {
+                    //Name Changed(_name, value) // pseudo-code to guide what delegate to make
+                    NameChangedEventArgs args = new NameChangedEventArgs();
+                    args.ExistingName = _name;
+                    args.NewName = value;
+
+                    NameChanged(this, args);
+                }
+                _name = value;
+
             }
         }
 
