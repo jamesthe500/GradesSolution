@@ -15,8 +15,11 @@ namespace Grades
             grades = new List<float>(); // This is brought from below. new instance of List FIELD with every instance of GradeBook.
         }
 
-        public GradeStatistics ComputeStatistics()
+        public virtual GradeStatistics ComputeStatistics() // virtual kw needed for polymorphism
+            // this way when the compiler sees teh invocation "ComputeStatistic", 
+            // it will use the type of object instead of teh type of variable to decide which method it will call.
         {
+            Console.WriteLine("gb::Compute statistics"); // This was to test which "ComputeStatistics was being called. It was this one.
             GradeStatistics stats = new GradeStatistics();
 
             float sum = 0;
@@ -95,6 +98,7 @@ namespace Grades
         // an explicitly created field to hold the string value is needed.
         private string _name;
 
-        private List<float> grades; //  = new List<float>(); // must initialize a new instance of List, insure it points to an obj.
+        // protected level gives access to this class and in a derived class
+        protected List<float> grades; //  = new List<float>(); // must initialize a new instance of List, insure it points to an obj.
     }
 }

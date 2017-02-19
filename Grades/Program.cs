@@ -12,14 +12,18 @@ namespace Grades
     {
         static void Main(string[] args)
         {
-
-            GradeBook book = new GradeBook(); //constructor, new kw is invoking a new instance of GradeBook
+            GradeBook book = CreateGradeBook(); //constructor, new kw is invoking a new instance of GradeBook
 
             // These methods were created by highlighting code and ctrl-. to extract method. Too many things on Main method.
-            GetBookName(book); 
+            GetBookName(book);
             AddGrades(book);
             SaveGrades(book);
             WriteResults(book);
+        }
+
+        private static GradeBook CreateGradeBook()
+        {
+            return new ThrowAwayGradeBook();
         }
 
         private static void WriteResults(GradeBook book)
