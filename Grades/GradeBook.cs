@@ -7,17 +7,15 @@ using System.Threading.Tasks;
 
 namespace Grades
 {
-    public class GradeBook
+    public class GradeBook : GradeTracker // for the abstract class, it must inherit from it.
     {
         public GradeBook() // constructor, custom. Default (doesn't take parameters)
         {
             _name = "default grade book";
             grades = new List<float>(); // This is brought from below. new instance of List FIELD with every instance of GradeBook.
-        }
+        } 
 
-        public virtual GradeStatistics ComputeStatistics() // virtual kw needed for polymorphism
-            // this way when the compiler sees teh invocation "ComputeStatistic", 
-            // it will use the type of object instead of teh type of variable to decide which method it will call.
+        public override GradeStatistics ComputeStatistics() // switched to override becasue now ComputeStatistics is providing an implementation for the abstract in GradTracker
         {
             Console.WriteLine("gb::Compute statistics"); // This was to test which "ComputeStatistics was being called. It was this one.
             GradeStatistics stats = new GradeStatistics();
@@ -34,7 +32,7 @@ namespace Grades
 
         }
 
-        public void WriteGrades(TextWriter destination) // TextWriter type doesn't care where it's sending the text.
+        public override void WriteGrades(TextWriter destination) // TextWriter type doesn't care where it's sending the text.
         {
             /*
             for (int i = 0; i < grades.Count; i++)
@@ -49,7 +47,7 @@ namespace Grades
             }
         }
 
-        public void AddGrade(float grade)
+        public override void AddGrade(float grade)
         {
             grades.Add(grade);
         }
@@ -66,38 +64,6 @@ namespace Grades
         */
 
         // here we have some data validation. the auto implement sytax (get; set;) is all or nothing, so both have to have code internal
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentException("Name cannot be blank.");
-                }
-
-                if (_name != value && NameChanged != null) // A delegate to let the program know when the name is changed. Databinding e.g.
-                {
-                    //Name Changed(_name, value) // pseudo-code to guide what delegate to make
-                    NameChangedEventArgs args = new NameChangedEventArgs();
-                    args.ExistingName = _name;
-                    args.NewName = value;
-
-                    NameChanged(this, args);
-                }
-                _name = value;
-
-            }
-        }
-
-        public event NameChangedDelegate NameChanged; // just add the event kw and this becomes one.
-
-        // an explicitly created field to hold the string value is needed.
-        private string _name;
-
         // protected level gives access to this class and in a derived class
         protected List<float> grades; //  = new List<float>(); // must initialize a new instance of List, insure it points to an obj.
     }

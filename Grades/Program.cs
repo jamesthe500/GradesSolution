@@ -12,7 +12,7 @@ namespace Grades
     {
         static void Main(string[] args)
         {
-            GradeBook book = CreateGradeBook(); //constructor, new kw is invoking a new instance of GradeBook
+            GradeTracker book = CreateGradeBook(); //constructor, new kw is invoking a new instance of GradeBook
 
             // These methods were created by highlighting code and ctrl-. to extract method. Too many things on Main method.
             GetBookName(book);
@@ -21,12 +21,12 @@ namespace Grades
             WriteResults(book);
         }
 
-        private static GradeBook CreateGradeBook()
+        private static GradeTracker CreateGradeBook()
         {
             return new ThrowAwayGradeBook();
         }
 
-        private static void WriteResults(GradeBook book)
+        private static void WriteResults(GradeTracker book)
         {
             GradeStatistics stats = book.ComputeStatistics();
             WriteResults("Average", stats.AverageGrade);
@@ -35,7 +35,7 @@ namespace Grades
             WriteResults(stats.Description, stats.LetterGrade);
         }
 
-        private static void SaveGrades(GradeBook book)
+        private static void SaveGrades(GradeTracker book)
         {
             /*
             StreamWriter outputFile = File.CreateText("grades.txt"); // had to add system.IO namespace to top. Typed "File" ctrl-. to let VS make it easy.
@@ -51,14 +51,14 @@ namespace Grades
             }
         }
 
-        private static void AddGrades(GradeBook book)
+        private static void AddGrades(GradeTracker book)
         {
             book.AddGrade(91);
             book.AddGrade(89.5f); //The f instructs to make this a float.
             book.AddGrade(75);
         }
 
-        private static void GetBookName(GradeBook book)
+        private static void GetBookName(GradeTracker book)
         {
             try // b/c the written value could be null and thus throw and exception, we try it first
             {
