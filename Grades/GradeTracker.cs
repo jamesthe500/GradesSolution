@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Grades
 {
-    public abstract class GradeTracker // abstract classes define some general behavior.?
-        // can't instantiate an abstract class directly. you can work with it, just no "new GradeTracker"...
+    public abstract class GradeTracker : IGradeTracker // One way to implement an interface is to do so through the abstract method
+        // This gradeTrackers is now an IGradeTracker & its members can be abstract
     {
         public abstract void AddGrade(float grade); // doesn't specify its implimentation b/c we dont' know what it will be exactly, we just know grades will need to be added.
         public abstract GradeStatistics ComputeStatistics();
