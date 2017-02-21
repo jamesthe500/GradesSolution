@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -62,6 +63,13 @@ namespace Grades
             get; set;
         }
         */
+
+        public override IEnumerator GetEnumerator()
+        {
+           
+           return grades.GetEnumerator();
+            
+        }
 
         // here we have some data validation. the auto implement sytax (get; set;) is all or nothing, so both have to have code internal
         // protected level gives access to this class and in a derived class
